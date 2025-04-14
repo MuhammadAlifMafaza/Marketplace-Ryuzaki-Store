@@ -1,0 +1,110 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/* navbar Style */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.navbar-brand img {
+    width: 75px;
+    height: auto;
+}
+
+.navbar-brand span {
+    margin-left: 10px;
+}
+
+/* Styling Card Dashboard & Logout */
+.dashboard-card,
+.logout-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin-left: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover,
+.logout-card:hover {
+    background-color: #e9ecef;
+}
+
+.dashboard-card a,
+.logout-card a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-card i,
+.logout-card i {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+/* Product Style */
+.brand img {
+    width: 40px;
+    height: 40px;
+}
+
+.product-container {
+    max-width: 900px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.category,
+.tag {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.category {
+    background-color: #ff4757;
+    color: white;
+}
+
+.tag.casual {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.tag.pakaian-wanita {
+    background-color: #8e44ad;
+    color: white;
+}
+
+.size {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.price {
+    font-size: 1.5em;
+    color: #e74c3c;
+}
+
+.size-buttons .btn {
+    margin: 5px;
+}
