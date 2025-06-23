@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Models\KaryawanModel;
+use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
+
+class AuthAdminController extends BaseController
+{
+
+    protected $karyawanModel;
+    protected $session;
+
+    public function __construct()
+    {
+        $this->karyawanModel = new KaryawanModel();
+        $this->session = session();
+    }
+
+    public function login()
+    {
+        if ($this->session->get('logged_in')) {
+            return redirect()->to('admin/login');
+        }
+
+        return view('employers/auth/login');
+    }
+
+    public function loginProcess()
+    {
+        $loginInput = $this->request->getPost('login'); // Bisa username atau email
+        $password = $this->request->getPost('password');
+
+        // Cari user berdasarkan username atau email
+        $user = $this->karyawanModel
+            ->where('username', $loginInput)
+            ->orWhere('email', $loginInput)
+            ->first();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Username atau email tidak ditemukan.');
+        }
+
+        // Verifikasi password
+        if (!password_verify($password, $user['password'])) {
+            return redirect()->back()->with('error', 'Password salah.');
+        }
+
+        // Simpan data user ke session
+        $this->session->set([
+            'id_karyawan' => $user['id_karyawan'],
+            'username' => $user['username'],
+            'email' => $user['email'],
+            'full_name' => $user['full_name'],
+            'jabatan' => $user['jabatan'],
+            'logged_in' => true,
+        ]);
+
+        // Arahkan berdasarkan jabatan/role
+        switch ($user['jabatan']) {
+            case 'admin':
+                return redirect()->to('/admin/dashboard');
+            case 'kurir':
+                return redirect()->to('/kurir/dashboard');
+            case 'owner':
+                return redirect()->to('/owner/dashboard');
+            default:
+                return redirect()->to('/dashboard');
+        }
+    }
+
+    public function forgotPassword()
+    {
+        return view('employers/auth/forgot-password');
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('admin/login');
+    }
+}
