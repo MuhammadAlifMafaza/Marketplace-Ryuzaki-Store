@@ -53,6 +53,7 @@ class AuthAdminController extends BaseController
             'id_karyawan' => $user['id_karyawan'],
             'username' => $user['username'],
             'email' => $user['email'],
+            'img_profile' => $user['img_profile'],
             'full_name' => $user['full_name'],
             'jabatan' => $user['jabatan'],
             'logged_in' => true,

@@ -149,7 +149,7 @@
                     <?= session()->get('username'); ?>
                 </span>
                 <?php
-                $profileImage = session()->get('img_profile') ? session()->get('img_profile') : 'default.png';
+                $profileImage = session()->get('img_profile') ? session()->get('img_profile') : 'default.svg';
                 ?>
                 <img class="img-profile rounded-circle" src="<?= base_url('uploads/profiles/' . $profileImage); ?>"
                     alt="Foto Profil">
