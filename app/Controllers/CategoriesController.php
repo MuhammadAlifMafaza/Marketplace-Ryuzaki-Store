@@ -23,6 +23,7 @@ class CategoriesController extends BaseController
     public function index()
     {
         $data['masterCategories'] = $this->masterCategoryModel->findAll();
+        $data['subCategories'] = $this->subCategoryModel->findAll();
         return view('employers/admin/categories/index.php', $data);
     }
 
@@ -82,7 +83,7 @@ class CategoriesController extends BaseController
     public function editMaster($id)
     {
         $data['category'] = $this->masterCategoryModel->find($id);
-        return view('categories/edit_master', $data);
+        return view('employers/admin/categories/edit_master', $data);
     }
 
     // Update master category

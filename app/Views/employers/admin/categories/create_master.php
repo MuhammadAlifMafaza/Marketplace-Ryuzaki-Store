@@ -12,6 +12,7 @@
             <?php endif; ?>
 
             <form action="<?= base_url('admin/categories/store') ?>" method="post">
+
                 <div class="form-group">
                     <label for="id_master_category">ID Kategori</label>
                     <input type="text" class="form-control" name="id_master_category" id="id_master_category" value="<?= old('id_master_category') ?>" readonly>

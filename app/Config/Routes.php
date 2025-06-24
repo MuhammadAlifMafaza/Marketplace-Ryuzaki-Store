@@ -26,12 +26,14 @@ $routes->group('admin', function ($routes) {
 
     $routes->get('dashboard', 'AdminController::dashboard');
 
+    // routes untuk produk
     $routes->get('list-product', 'AdminController::listProduct');
     $routes->get('create-product', 'AdminController::addProduct');
     $routes->get('edit-product', 'AdminController::editProduct');
     $routes->get('detail-product', 'AdminController::detailProduct');
     $routes->post('delete-product', 'AdminController::deleteProduct');
 
+    // routes untuk kategori utama
     $routes->get('categories', 'CategoriesController::index');
     $routes->get('categories/create', 'CategoriesController::createMaster');
     $routes->post('categories/store', 'CategoriesController::storeMaster');
@@ -39,12 +41,19 @@ $routes->group('admin', function ($routes) {
     $routes->post('categories/update/(:num)', 'CategoriesController::updateMaster/$1');
     $routes->get('categories/delete/(:num)', 'CategoriesController::deleteMaster/$1');
 
+    // routes untuk sub kategori
     $routes->get('categories/subcategories/(:num)', 'CategoriesController::subcategories/$1');
     $routes->get('categories/subcategories/create/(:num)', 'CategoriesController::createSub/$1');
     $routes->post('categories/subcategories/store', 'CategoriesController::storeSub');
     $routes->get('categories/subcategories/edit/(:num)', 'CategoriesController::editSub/$1');
     $routes->post('categories/subcategories/update/(:num)', 'CategoriesController::updateSub/$1');
     $routes->get('categories/subcategories/delete/(:num)', 'CategoriesController::deleteSub/$1');
+
+    // routes untuk order
+    $routes->get('orders', 'OrdersController::index');
+    $routes->get('orders/detail/(:num)', 'OrdersController::detail/$1');
+    $routes->post('orders/update-status', 'OrdersController::updateStatus');    
+
 });
 
 // routes untuk owner

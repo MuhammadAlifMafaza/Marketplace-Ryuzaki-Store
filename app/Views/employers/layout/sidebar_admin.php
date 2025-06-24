@@ -38,16 +38,16 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
             aria-expanded="true" aria-controls="collapseProducts">
-            <i class="fas fa-fw fa-list-alt"></i>
-            <span>Product</span>
+            <i class="fas fa-fw fa-list"></i>
+            <span>Categories</span>
         </a>
         <div id="collapseProducts" class="collapse" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Data Products:</h6>
-                <a class="collapse-item" href="/list-Customer">List Products</a>
+                <h6 class="collapse-header">Data Master Categories:</h6>
+                <a class="collapse-item" href="/admin/categories">List Master Categorie</a>
                 <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Data Category:</h6>
-                <a class="collapse-item" href="">List Category</a>
+                <h6 class="collapse-header">Data Sub Categories:</h6>
+                <a class="collapse-item" href="">List Sub Category</a>
             </div>
         </div>
     </li>

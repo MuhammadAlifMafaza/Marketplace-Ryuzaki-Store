@@ -14,14 +14,14 @@ class AdminController extends BaseController
 
     protected $productModel;
     protected $subCategoriesModel;
-    protected $MasterCategoriesModel;
+    protected $masterCategoriesModel;
     protected $productSubCategoriesModel;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
         $this->subCategoriesModel = new SubCategoriesModel();
-        $this->MasterCategoriesModel = new MasterCategoriesModel();
+        $this->masterCategoriesModel = new MasterCategoriesModel();
         $this->productSubCategoriesModel = new ProductSubCategoriesModel();
     }
 
@@ -35,11 +35,11 @@ class AdminController extends BaseController
     public function listProduct()
     {
         $data['products'] = $this->productModel->findAll();
-        return view('employers\admin\products\index.php', $data);
+        return view('employers/admin/products/index.php', $data);
     }
     public function addProduct()
     {
-        return view('employers\admin\products\create.php');
+        return view('employers/admin/products/create.php');
     }
     public function insertProduct()
     {
