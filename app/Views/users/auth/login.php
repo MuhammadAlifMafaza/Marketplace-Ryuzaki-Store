@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard - Login</title>
+    <title>Ryuzaki store - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('template/sb-admin2/vendor/fontawesome-free/css/all.min.css'); ?>" rel="stylesheet"

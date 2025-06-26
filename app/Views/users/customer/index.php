@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>Ryuzaki-Store</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="<?= base_url('assets/img/web-logo.png') ?>" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -132,7 +132,7 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
+            <div class="hero__items set-bg" data-setbg="<?= base_url('template/male-fashion/img/hero/hero-1.jpg') ?>">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
@@ -153,7 +153,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-2.jpg">
+            <div class="hero__items set-bg" data-setbg="<?= base_url('template/male-fashion/img/hero/hero-2.jpg') ?>">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
@@ -185,7 +185,7 @@
                 <div class="col-lg-7 offset-lg-4">
                     <div class="banner__item">
                         <div class="banner__item__pic">
-                            <img src="img/banner/banner-1.jpg" alt="">
+                            <img src="<?= base_url('template/male-fashion/img/banner/banner-1.jpg') ?>" alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Clothing Collections 2030</h2>
@@ -196,7 +196,7 @@
                 <div class="col-lg-5">
                     <div class="banner__item banner__item--middle">
                         <div class="banner__item__pic">
-                            <img src="img/banner/banner-2.jpg" alt="">
+                            <img src="<?= base_url('template/male-fashion/img/banner/banner-2.jpg') ?>" alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Accessories</h2>
@@ -207,7 +207,7 @@
                 <div class="col-lg-7">
                     <div class="banner__item banner__item--last">
                         <div class="banner__item__pic">
-                            <img src="img/banner/banner-3.jpg" alt="">
+                            <img src="<?= base_url('template/male-fashion/img/banner/banner-3.jpg') ?>" alt="">
                         </div>
                         <div class="banner__item__text">
                             <h2>Shoes Spring 2030</h2>
@@ -235,7 +235,7 @@
             <div class="row product__filter">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<?= base_url('template/male-fashion/img/product/product-1.jpg') ?>">
                             <span class="label">New</span>
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
@@ -270,7 +270,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<?= base_url('template/male-fashion/img/product/product-2.jpg') ?>">
                             <ul class="product__hover">
                                 <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
                                 <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
@@ -304,12 +304,12 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                     <div class="product__item sale">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<?= base_url('template/male-fashion/img/product/product-3.jpg') ?>">
                             <span class="label">Sale</span>
                             <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/heart.png') ?>" alt=""></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/compare.png') ?>" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/search.png') ?>" alt=""></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">
@@ -339,11 +339,11 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix hot-sales">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="<?= base_url('template/male-fashion/img/product/product-4.jpg') ?>">
                             <ul class="product__hover">
-                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
-                                <li><a href="#"><img src="img/icon/compare.png" alt=""> <span>Compare</span></a></li>
-                                <li><a href="#"><img src="img/icon/search.png" alt=""></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/heart.png') ?>" alt=""></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/compare.png') ?>" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="<?= base_url('template/male-fashion/img/icon/search.png') ?>" alt=""></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">
@@ -668,18 +668,6 @@
                             <li><a href="#">Delivary</a></li>
                             <li><a href="#">Return & Exchanges</a></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

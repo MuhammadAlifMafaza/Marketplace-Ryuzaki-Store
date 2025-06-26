@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url("/admin/list-product") ?>">
+        <a class="nav-link collapsed" href="<?= base_url("/admin/products") ?>">
             <i class="fas fa-fw fa-boxes"></i>
             <span>Products</span>
         </a>
@@ -63,10 +63,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data Users:</h6>
                 <a class="collapse-item" href="/list-Customer">Customer</a>
-                <a class="collapse-item" href="/list-Seller">Seller</a>
+                <a class="collapse-item" href="/list-Seller">Seller (optional)</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Data Karyawan:</h6>
                 <a class="collapse-item" href="">Admin</a>
+                <a class="collapse-item" href="">Kurir</a>
+                <a class="collapse-item" href="">Owner</a>
             </div>
         </div>
     </li>

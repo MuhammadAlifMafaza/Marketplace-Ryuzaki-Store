@@ -7,9 +7,8 @@ use App\Models\KaryawanModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class AuthAdminController extends BaseController
+class AuthKaryawanController extends BaseController
 {
-
     protected $karyawanModel;
     protected $session;
 
@@ -22,7 +21,7 @@ class AuthAdminController extends BaseController
     public function login()
     {
         if ($this->session->get('logged_in')) {
-            return redirect()->to('admin/login');
+            return redirect()->to('karyawanlogin');
         }
 
         return view('employers/auth/login');
@@ -64,9 +63,9 @@ class AuthAdminController extends BaseController
             case 'admin':
                 return redirect()->to('/admin/dashboard');
             case 'kurir':
-                return redirect()->to('/kurir/dashboard');
+                return redirect()->to('/admin/dashboard');
             case 'owner':
-                return redirect()->to('/owner/dashboard');
+                return redirect()->to('/admin/dashboard');
             default:
                 return redirect()->to('/dashboard');
         }
@@ -80,6 +79,6 @@ class AuthAdminController extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('admin/login');
+        return redirect()->to('karyawanlogin');
     }
 }

@@ -15,54 +15,55 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama Kategori / Subkategori</th>
-                                    <th>Deskripsi / Tipe</th>
-                                    <th>Aksi</th>
+                                    <th style="width: 5%;">No</th>
+                                    <th style="width: 35%;">Nama Kategori / Subkategori</th>
+                                    <th style="width: 35%;">Deskripsi / Tipe</th>
+                                    <th style="width: 25%;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1;
                                 foreach ($masterCategories as $cat): ?>
-                                    <tr data-toggle="collapse" data-target="#sub-<?= $cat['id_master_category'] ?>" class="accordion-toggle">
+                                    <!-- Kategori Utama -->
+                                    <tr class="bg-white font-weight-bold toggle-row" data-toggle="collapse" data-target=".sub-<?= $cat['id_master_category'] ?>" style="cursor: pointer;">
                                         <td><?= $no++ ?></td>
-                                        <td>
-                                            <i class="fas fa-chevron-down text-secondary mr-2"></i>
-                                            <?= esc($cat['name_category']) ?>
-                                        </td>
+                                        <td><i class="text-secondary mr-2">▸</i> <?= esc($cat['name_category']) ?></td>
                                         <td><?= esc($cat['description']) ?></td>
                                         <td>
                                             <a href="<?= base_url('admin/categories/edit/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="<?= base_url('admin/categories/delete/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</a>
+                                            <a href="<?= base_url('admin/categories/delete/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">Hapus</a>
                                             <a href="<?= base_url('admin/categories/subcategories/create/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-info">+ Sub</a>
                                         </td>
                                     </tr>
 
-                                    <tr class="collapse bg-light" id="sub-<?= $cat['id_master_category'] ?>">
-                                        <td colspan="4">
-                                            <ul class="list-unstyled mb-0">
-                                                <?php
-                                                $found = false;
-                                                foreach ($subCategories as $sub):
-                                                    if ($sub['id_master_category'] === $cat['id_master_category']):
-                                                        $found = true;
-                                                ?>
-                                                        <li class="mb-2">
-                                                            <strong>↳ <?= esc($sub['name_sub_category']) ?></strong>
-                                                            <span class="text-muted ml-2">[<?= esc($sub['type']) ?>]</span>
-                                                            <a href="<?= base_url('admin/categories/subcategories/edit/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-warning ml-2">Edit</a>
-                                                            <a href="<?= base_url('admin/categories/subcategories/delete/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus subkategori?')">Hapus</a>
-                                                        </li>
-                                                <?php endif;
-                                                endforeach; ?>
-                                                <?php if (!$found): ?>
-                                                    <li class="text-muted">Tidak ada subkategori</li>
-                                                <?php endif; ?>
-                                            </ul>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $hasSub = false;
+                                    foreach ($subCategories as $sub):
+                                        if ($sub['id_master_category'] === $cat['id_master_category']):
+                                            $hasSub = true;
+                                    ?>
+                                            <!-- Subkategori (tersembunyi default) -->
+                                            <tr class="collapse sub-<?= $cat['id_master_category'] ?> bg-light">
+                                                <td></td>
+                                                <td>↳ <?= esc($sub['name_sub_category']) ?></td>
+                                                <td><?= esc($sub['type']) ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('admin/categories/subcategories/edit/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                    <a href="<?= base_url('admin/categories/subcategories/delete/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus subkategori ini?')">Hapus</a>
+                                                </td>
+                                            </tr>
+                                    <?php endif;
+                                    endforeach; ?>
+
+                                    <?php if (!$hasSub): ?>
+                                        <tr class="collapse sub-<?= $cat['id_master_category'] ?> bg-light text-muted">
+                                            <td></td>
+                                            <td>↳ Tidak ada subkategori</td>
+                                            <td colspan="2"></td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -76,3 +77,4 @@
 </div>
 
 <?= $this->include('employers/layout/footer') ?>
+

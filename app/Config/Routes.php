@@ -7,61 +7,92 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'CustomerController::index');
 
-// routes untuk customer
+// ======================== AUTH ========================
+$routes->group('/', function ($routes) {
+    $routes->get('login', 'AuthController::login');
+    $routes->post('login', 'AuthController::loginProcess');
+    $routes->get('register', 'AuthController::register');
+    $routes->post('register', 'AuthController::registerProcess');
+    $routes->get('logout', 'AuthController::logout');
+});
+
+// ======================== CUSTOMER ========================
 $routes->group('customer', function ($routes) {
-    $routes->get('', '');
+    $routes->get('cart', 'MarketplaceController::cart');
+    $routes->get('orders', 'MarketplaceController::orderHistory');
+    $routes->get('orders/(:segment)/items', 'MarketplaceController::orderItems/$1');
+    $routes->get('profile', 'MarketplaceController::profile');
+    $routes->get('shipping/(:segment)', 'MarketplaceController::shippingStatus/$1');
+    $routes->get('payment/(:segment)', 'MarketplaceController::paymentStatus/$1');
+    $routes->get('reviews/(:segment)', 'MarketplaceController::productReviews/$1');
 });
 
-$routes->group('owner', function ($routes) {
-    $routes->get('/', '');
+// ======================== SELLER(?) ========================
+$routes->group('seller', function ($routes) {
+    $routes->get('dashboard', 'SellerController::dashboard');
+    // tambah routes seller lainnya di sini
 });
 
-// routes untuk admin
+// ======================== AUTH KARYAWAN ========================
+$routes->group('karyawan', function ($routes) {
+    // auth khusus karyawan
+    $routes->get('login', 'AuthKaryawanController::login');
+    $routes->post('loginProcess', 'AuthKaryawanController::loginProcess');
+    $routes->get('forgot-password', 'AuthKaryawanController::forgotPassword');
+    $routes->post('forgot-password', 'AuthKaryawanController::forgotPasswordProcess');
+    $routes->get('reset-password/(:any)', 'AuthKaryawanController::resetPassword/$1');
+    $routes->post('reset-password', 'AuthKaryawanController::resetPasswordProcess');
+    $routes->get('logout', 'AuthKaryawanController::logout');
+});
+
 $routes->group('admin', function ($routes) {
-    $routes->get('login', 'AuthAdminController::login');
-    $routes->post('loginProcess', 'AuthAdminController::loginProcess');
-    $routes->get('forgot-password', 'AuthAdminController::forgotPassword');
-    $routes->post('forgot-password', '');
-    $routes->get('logout', 'AuthAdminController::logout');
-
     $routes->get('dashboard', 'AdminController::dashboard');
 
-    // routes untuk produk
-    $routes->get('list-product', 'AdminController::listProduct');
-    $routes->get('create-product', 'AdminController::addProduct');
-    $routes->get('edit-product', 'AdminController::editProduct');
-    $routes->get('detail-product', 'AdminController::detailProduct');
-    $routes->post('delete-product', 'AdminController::deleteProduct');
+    // Produk
+    $routes->group('products', function ($routes) {
+        $routes->get('/', 'AdminController::listProduct');
+        $routes->get('create', 'AdminController::addProduct');
+        $routes->get('edit/(:num)', 'AdminController::editProduct/$1');
+        $routes->get('detail/(:num)', 'AdminController::detailProduct/$1');
+        $routes->post('delete/(:num)', 'AdminController::deleteProduct/$1');
+    });
 
-    // routes untuk kategori utama
-    $routes->get('categories', 'CategoriesController::index');
-    $routes->get('categories/create', 'CategoriesController::createMaster');
-    $routes->post('categories/store', 'CategoriesController::storeMaster');
-    $routes->get('categories/edit/(:num)', 'CategoriesController::editMaster/$1');
-    $routes->post('categories/update/(:num)', 'CategoriesController::updateMaster/$1');
-    $routes->get('categories/delete/(:num)', 'CategoriesController::deleteMaster/$1');
+    // Kategori Master & Sub
+    $routes->group('categories', function ($routes) {
+        $routes->get('/', 'CategoriesController::index');
+        $routes->get('create', 'CategoriesController::createMaster');
+        $routes->post('store', 'CategoriesController::storeMaster');
+        $routes->get('edit/(:num)', 'CategoriesController::editMaster/$1');
+        $routes->post('update/(:num)', 'CategoriesController::updateMaster/$1');
+        $routes->get('delete/(:num)', 'CategoriesController::deleteMaster/$1');
 
-    // routes untuk sub kategori
-    $routes->get('categories/subcategories/(:num)', 'CategoriesController::subcategories/$1');
-    $routes->get('categories/subcategories/create/(:num)', 'CategoriesController::createSub/$1');
-    $routes->post('categories/subcategories/store', 'CategoriesController::storeSub');
-    $routes->get('categories/subcategories/edit/(:num)', 'CategoriesController::editSub/$1');
-    $routes->post('categories/subcategories/update/(:num)', 'CategoriesController::updateSub/$1');
-    $routes->get('categories/subcategories/delete/(:num)', 'CategoriesController::deleteSub/$1');
+        // Sub
+        $routes->group('subcategories', function ($routes) {
+            $routes->get('(:num)', 'CategoriesController::subcategories/$1');
+            $routes->get('create/(:any)', 'CategoriesController::createSub/$1');
+            $routes->post('store', 'CategoriesController::storeSub');
+            $routes->get('edit/(:num)', 'CategoriesController::editSub/$1');
+            $routes->post('update/(:num)', 'CategoriesController::updateSub/$1');
+            $routes->get('delete/(:num)', 'CategoriesController::deleteSub/$1');
+        });
+    });
 
-    // routes untuk order
-    $routes->get('orders', 'OrdersController::index');
-    $routes->get('orders/detail/(:num)', 'OrdersController::detail/$1');
-    $routes->post('orders/update-status', 'OrdersController::updateStatus');    
-
+    // Orders
+    $routes->group('orders', function ($routes) {
+        $routes->get('/', 'OrdersController::index');
+        $routes->get('detail/(:num)', 'OrdersController::detail/$1');
+        $routes->post('update-status', 'OrdersController::updateStatus');
+    });
 });
 
-// routes untuk owner
+// ======================== OWNER ========================
 $routes->group('owner', function ($routes) {
-    $routes->get('/', '');
+    $routes->get('dashboard', 'OwnerController::dashboard');
+    // Tambah fitur lainnya untuk owner di sini
 });
 
-// routes untuk Courir
+// ======================== KURIR ========================
 $routes->group('kurir', function ($routes) {
-    $routes->get('', '');
+    $routes->get('dashboard', 'CourierController::dashboard');
+    // Tambah fitur lainnya untuk kurir di sini
 });

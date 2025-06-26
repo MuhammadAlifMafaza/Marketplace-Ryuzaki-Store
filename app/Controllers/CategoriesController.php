@@ -106,6 +106,23 @@ class CategoriesController extends BaseController
 
     // ================= SUB CATEGORIES ================= //
 
+    // Generate unique ID for subcategory
+    // This function generates a unique ID for subcategories based on the master category ID and the subcategory name.
+    // It ensures that the ID is unique by appending a counter to the slugified name.
+    private function generateSubCategoryID($name)
+    {
+        $slug = url_title($name, '-', true); // contoh: jasa kirim => jasa-kirim
+        $index = 1;
+
+        do {
+            $newId = $slug . '-' . str_pad($index, 3, '0', STR_PAD_LEFT);
+            $exists = $this->subCategoryModel->find($newId);
+            $index++;
+        } while ($exists);
+
+        return $newId;
+    }
+
     // List subcategories for specific master
     public function subcategories($masterId)
     {
@@ -115,22 +132,42 @@ class CategoriesController extends BaseController
     }
 
     // Show form to add subcategory
-    public function createSub($masterId)
+    public function createSub($idMaster)
     {
-        $data['masterId'] = $masterId;
-        return view('categories/create_sub', $data);
+        $master = $this->masterCategoryModel->find($idMaster);
+
+        if (!$master) {
+            return redirect()->to('/admin/categories')->with('error', 'Kategori utama tidak ditemukan.');
+        }
+
+        return view('employers/admin/categories/create_sub', ['master' => $master]);
     }
+
 
     // Save new subcategory
     public function storeSub()
     {
-        $this->subCategoryModel->save([
-            'id_master_category' => $this->request->getPost('id_master_category'),
-            'name_sub_category' => $this->request->getPost('name_sub_category'),
-            'type' => $this->request->getPost('type')
+        $name = $this->request->getPost('name_sub_category');
+        $type = $this->request->getPost('type');
+        $idMaster = $this->request->getPost('id_master_category');
+
+        // Generate final ID (pastikan benar dari server-side)
+        $generatedId = $this->generateSubCategoryID($name);
+
+        // Cek duplikat ID
+        if ($this->subCategoryModel->find($generatedId)) {
+            return redirect()->back()->withInput()->with('error', 'ID subkategori sudah digunakan. Silakan ubah nama.');
+        }
+
+        $this->subCategoryModel->insert([
+            'id_sub_category' => $generatedId,
+            'id_master_category' => $idMaster,
+            'name_sub_category' => $name,
+            'type' => $type
         ]);
 
-        return redirect()->to('/categories/subcategories/' . $this->request->getPost('id_master_category'));
+        return redirect()->to('admin/categories/')
+            ->with('success', 'Subkategori berhasil ditambahkan.');
     }
 
     // Edit subcategory

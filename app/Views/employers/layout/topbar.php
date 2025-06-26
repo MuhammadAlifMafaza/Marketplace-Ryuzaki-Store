@@ -145,9 +145,30 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
+                <?php
+                $jabatan = session()->get('jabatan');
+                $warnaBadge = 'badge-secondary';
+
+                switch ($jabatan) {
+                    case 'admin':
+                        $warnaBadge = 'badge-success';
+                        break;
+                    case 'kurir':
+                        $warnaBadge = 'badge-warning';
+                        break;
+                    case 'owner':
+                        $warnaBadge = 'badge-danger';
+                        break;
+                }
+                ?>
+
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     <?= session()->get('username'); ?>
+                    <span class="badge <?= $warnaBadge ?> ml-1 text-uppercase">
+                        <?= $jabatan ?>
+                    </span>
                 </span>
+
                 <?php
                 $profileImage = session()->get('img_profile') ? session()->get('img_profile') : 'default.svg';
                 ?>
