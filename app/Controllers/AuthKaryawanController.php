@@ -21,7 +21,14 @@ class AuthKaryawanController extends BaseController
     public function login()
     {
         if ($this->session->get('logged_in')) {
-            return redirect()->to('karyawanlogin');
+            switch ($this->session->get('jabatan')) {
+                case 'admin':
+                    return redirect()->to('/admin/dashboard');
+                case 'kurir':
+                    return redirect()->to('/admin/dashboard');
+                case 'owner':
+                    return redirect()->to('/admin/dashboard');
+            }
         }
 
         return view('employers/auth/login');
@@ -55,6 +62,7 @@ class AuthKaryawanController extends BaseController
             'img_profile' => $user['img_profile'],
             'full_name' => $user['full_name'],
             'jabatan' => $user['jabatan'],
+            'karyawan_logged_in' => true, 
             'logged_in' => true,
         ]);
 
@@ -79,6 +87,6 @@ class AuthKaryawanController extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('karyawanlogin');
+        return redirect()->to('/karyawan/login');
     }
 }

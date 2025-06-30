@@ -12,17 +12,17 @@ class FiltersKaryawan implements FilterInterface
     {
         $session = session();
 
-        if (!$session->has('isLoggedInKaryawan')) {
+        if (!$session->has('karyawan_logged_in')) {
             return redirect()->to('/karyawan/login');
+            // Ganti ke route login karyawan
         }
 
-        $expectedJabatan = $arguments[0] ?? null;
-        $userJabatan = $session->get('jabatan');
-
-        if ($expectedJabatan && $userJabatan !== $expectedJabatan) {
-            return redirect()->to('/login');
+        // Validasi jabatan jika ada argumen role tertentu
+        if ($arguments && !in_array($session->get('jabatan'), $arguments)) {
+            return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk mengakses halaman tersebut.');
         }
     }
+
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) {}
 }

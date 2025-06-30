@@ -36,13 +36,20 @@ class CategoriesController extends BaseController
     // Generate unique ID for master category
     private function generateCategoryID($name)
     {
-        $slug = url_title($name, '-', true); // "Minuman Dingin" => "minuman-dingin"
+        $slug = url_title($name, '-', true); // ex: "Pakaian Pria" => "pakaian-pria"
 
-        $count = $this->masterCategoryModel
-            ->like('id_master_category', $slug, 'after')
-            ->countAllResults();
+        // Cek apakah slug itu belum ada
+        if (!$this->masterCategoryModel->find($slug)) {
+            return $slug;
+        }
 
-        $newId = $slug . '-' . str_pad($count + 1, 3, '0', STR_PAD_LEFT); // minuman-dingin-001
+        // Kalau sudah ada, baru kasih suffix angka
+        $index = 1;
+        do {
+            $newId = $slug . '-' . str_pad($index, 3, '0', STR_PAD_LEFT);
+            $exists = $this->masterCategoryModel->find($newId);
+            $index++;
+        } while ($exists);
 
         return $newId;
     }
@@ -106,23 +113,6 @@ class CategoriesController extends BaseController
 
     // ================= SUB CATEGORIES ================= //
 
-    // Generate unique ID for subcategory
-    // This function generates a unique ID for subcategories based on the master category ID and the subcategory name.
-    // It ensures that the ID is unique by appending a counter to the slugified name.
-    private function generateSubCategoryID($name)
-    {
-        $slug = url_title($name, '-', true); // contoh: jasa kirim => jasa-kirim
-        $index = 1;
-
-        do {
-            $newId = $slug . '-' . str_pad($index, 3, '0', STR_PAD_LEFT);
-            $exists = $this->subCategoryModel->find($newId);
-            $index++;
-        } while ($exists);
-
-        return $newId;
-    }
-
     // List subcategories for specific master
     public function subcategories($masterId)
     {
@@ -143,6 +133,28 @@ class CategoriesController extends BaseController
         return view('employers/admin/categories/create_sub', ['master' => $master]);
     }
 
+    // Generate unique ID for subcategory
+    // This function generates a unique ID for subcategories based on the master category ID and the subcategory name.
+    // It ensures that the ID is unique by appending a counter to the slugified name.
+    private function generateSubCategoryID($name)
+    {
+        $slug = url_title($name, '-', true);
+
+        // Cek apakah slug itu belum dipakai sebagai id_sub_category
+        if (!$this->subCategoryModel->find($slug)) {
+            return $slug;
+        }
+
+        // Kalau sudah dipakai, cari yang belum ada dengan suffix
+        $index = 1;
+        do {
+            $newId = $slug . '-' . str_pad($index, 3, '0', STR_PAD_LEFT);
+            $exists = $this->subCategoryModel->find($newId);
+            $index++;
+        } while ($exists);
+
+        return $newId;
+    }
 
     // Save new subcategory
     public function storeSub()

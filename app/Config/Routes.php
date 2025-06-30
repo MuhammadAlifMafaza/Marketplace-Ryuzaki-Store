@@ -45,7 +45,7 @@ $routes->group('karyawan', function ($routes) {
     $routes->get('logout', 'AuthKaryawanController::logout');
 });
 
-$routes->group('admin', function ($routes) {
+$routes->group('admin', ['filter' => 'karyawan'],function ($routes) {
     $routes->get('dashboard', 'AdminController::dashboard');
 
     // Produk
@@ -86,13 +86,13 @@ $routes->group('admin', function ($routes) {
 });
 
 // ======================== OWNER ========================
-$routes->group('owner', function ($routes) {
+$routes->group('owner', ['filter' => 'karyawan:owner'],function ($routes) {
     $routes->get('dashboard', 'OwnerController::dashboard');
     // Tambah fitur lainnya untuk owner di sini
 });
 
 // ======================== KURIR ========================
-$routes->group('kurir', function ($routes) {
+$routes->group('kurir', ['filter:kurir'],function ($routes) {
     $routes->get('dashboard', 'CourierController::dashboard');
     // Tambah fitur lainnya untuk kurir di sini
 });

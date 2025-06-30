@@ -56,7 +56,7 @@
                                         </div>
                                     <?php endif; ?>
 
-                                    <form class="user" action="<?= base_url('admin/loginProcess') ?>" method="post">
+                                    <form class="user" action="<?= base_url('karyawan/loginProcess') ?>" method="post">
                                         <?= csrf_field() ?>
                                         <div class="form-group">
                                             <input type="text" name="login" class="form-control form-control-user"
