@@ -12,15 +12,14 @@ class FiltersUsers implements FilterInterface
     {
         $session = session();
 
-        if (!$session->has('isLoggedInUser')) {
-            return redirect()->to('/auth/login');
+        // Cek jika tidak ada session user
+        if (!$session->has('user_logged_in')) {
+            return redirect()->to('/login'); // Ganti ke route login user
         }
 
-        $expectedRole = $arguments[0] ?? null;
-        $userRole = $session->get('role');
-
-        if ($expectedRole && $userRole !== $expectedRole) {
-            return redirect()->to('/auth/login');
+        // Validasi role jika perlu (misal hanya customer)
+        if ($arguments && !in_array($session->get('role'), $arguments)) {
+            return redirect()->to('/unauthorized'); // Halaman tidak diizinkan
         }
     }
 

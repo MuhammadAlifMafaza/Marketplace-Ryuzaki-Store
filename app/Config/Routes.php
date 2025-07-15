@@ -33,9 +33,9 @@ $routes->group('seller', function ($routes) {
     // tambah routes seller lainnya di sini
 });
 
-// ======================== AUTH KARYAWAN ========================
+// ======================== ROUTES GROUP KARYAWAN ========================
 $routes->group('karyawan', function ($routes) {
-    // auth khusus karyawan
+    // ======================== AUTH KARYAWAN ========================
     $routes->get('login', 'AuthKaryawanController::login');
     $routes->post('loginProcess', 'AuthKaryawanController::loginProcess');
     $routes->get('forgot-password', 'AuthKaryawanController::forgotPassword');
@@ -43,56 +43,59 @@ $routes->group('karyawan', function ($routes) {
     $routes->get('reset-password/(:any)', 'AuthKaryawanController::resetPassword/$1');
     $routes->post('reset-password', 'AuthKaryawanController::resetPasswordProcess');
     $routes->get('logout', 'AuthKaryawanController::logout');
-});
 
-$routes->group('admin', ['filter' => 'karyawan'],function ($routes) {
-    $routes->get('dashboard', 'AdminController::dashboard');
+    $routes->group('admin', ['filter' => 'karyawan:admin'], function ($routes) {
 
-    // Produk
-    $routes->group('products', function ($routes) {
-        $routes->get('/', 'AdminController::listProduct');
-        $routes->get('create', 'AdminController::addProduct');
-        $routes->get('edit/(:num)', 'AdminController::editProduct/$1');
-        $routes->get('detail/(:num)', 'AdminController::detailProduct/$1');
-        $routes->post('delete/(:num)', 'AdminController::deleteProduct/$1');
-    });
+        $routes->get('dashboard', 'AdminController::dashboard');
 
-    // Kategori Master & Sub
-    $routes->group('categories', function ($routes) {
-        $routes->get('/', 'CategoriesController::index');
-        $routes->get('create', 'CategoriesController::createMaster');
-        $routes->post('store', 'CategoriesController::storeMaster');
-        $routes->get('edit/(:num)', 'CategoriesController::editMaster/$1');
-        $routes->post('update/(:num)', 'CategoriesController::updateMaster/$1');
-        $routes->get('delete/(:num)', 'CategoriesController::deleteMaster/$1');
+        // Produk
+        $routes->group('products', function ($routes) {
+            $routes->get('/', 'ProductController::indexProduct');
+            $routes->get('create', 'ProductController::addProduct');
+            $routes->post('store-product', 'ProductController::storeProduct');
+            $routes->get('edit/(:any)', 'ProductController::editProduct/$1');
+            $routes->post('update-product/(:any)', 'ProductController::updateProduct/$1');
+            $routes->get('detail/(:any)', 'ProductController::detailProduct/$1');
+            $routes->post('delete/(:any)', 'ProductController::deleteProduct/$1');
+        });
 
-        // Sub
-        $routes->group('subcategories', function ($routes) {
-            $routes->get('(:num)', 'CategoriesController::subcategories/$1');
-            $routes->get('create/(:any)', 'CategoriesController::createSub/$1');
-            $routes->post('store', 'CategoriesController::storeSub');
-            $routes->get('edit/(:num)', 'CategoriesController::editSub/$1');
-            $routes->post('update/(:num)', 'CategoriesController::updateSub/$1');
-            $routes->get('delete/(:num)', 'CategoriesController::deleteSub/$1');
+        // Kategori Master & Sub
+        $routes->group('categories', function ($routes) {
+            $routes->get('/', 'CategoriesController::index');
+            $routes->get('create', 'CategoriesController::createMaster');
+            $routes->post('store', 'CategoriesController::storeMaster');
+            $routes->get('edit/(:any)', 'CategoriesController::editMaster/$1');
+            $routes->post('update/(:any)', 'CategoriesController::updateMaster/$1');
+            $routes->get('delete/(:any)', 'CategoriesController::deleteMaster/$1');
+
+            // Sub
+            $routes->group('subcategories', function ($routes) {
+                $routes->get('(:any)', 'CategoriesController::subcategories/$1');
+                $routes->get('create/(:any)', 'CategoriesController::createSub/$1');
+                $routes->post('store', 'CategoriesController::storeSub');
+                $routes->get('edit/(:any)', 'CategoriesController::editSub/$1');
+                $routes->post('update/(:any)', 'CategoriesController::updateSub/$1');
+                $routes->get('delete/(:any)', 'CategoriesController::deleteSub/$1');
+            });
+        });
+
+        // Orders
+        $routes->group('orders', function ($routes) {
+            $routes->get('/', 'OrdersController::index');
+            $routes->get('detail/(:any)', 'OrdersController::detail/$1');
+            $routes->post('update-status', 'OrdersController::updateStatus');
         });
     });
 
-    // Orders
-    $routes->group('orders', function ($routes) {
-        $routes->get('/', 'OrdersController::index');
-        $routes->get('detail/(:num)', 'OrdersController::detail/$1');
-        $routes->post('update-status', 'OrdersController::updateStatus');
+    /* ======================== OWNER ======================== */
+    $routes->group('owner', ['filter' => 'karyawan:owner'], function ($routes) {
+        $routes->get('dashboard', 'OwnerController::dashboard');
+        // Tambah fitur lainnya untuk owner di sini
     });
-});
 
-// ======================== OWNER ========================
-$routes->group('owner', ['filter' => 'karyawan:owner'],function ($routes) {
-    $routes->get('dashboard', 'OwnerController::dashboard');
-    // Tambah fitur lainnya untuk owner di sini
-});
-
-// ======================== KURIR ========================
-$routes->group('kurir', ['filter:kurir'],function ($routes) {
-    $routes->get('dashboard', 'CourierController::dashboard');
-    // Tambah fitur lainnya untuk kurir di sini
+    /* ======================== KURIR ======================== */
+    $routes->group('kurir', ['filter' => 'karyawan:kurir'], function ($routes) {
+        $routes->get('dashboard', 'CourierController::dashboard');
+        // Tambah fitur lainnya untuk kurir di sini
+    });
 });

@@ -23,11 +23,11 @@ class AuthKaryawanController extends BaseController
         if ($this->session->get('logged_in')) {
             switch ($this->session->get('jabatan')) {
                 case 'admin':
-                    return redirect()->to('/admin/dashboard');
+                    return redirect()->to('karyawan/admin/dashboard');
                 case 'kurir':
-                    return redirect()->to('/admin/dashboard');
+                    return redirect()->to('karyawan/admin/dashboard');
                 case 'owner':
-                    return redirect()->to('/admin/dashboard');
+                    return redirect()->to('karyawan/admin/dashboard');
             }
         }
 
@@ -62,20 +62,20 @@ class AuthKaryawanController extends BaseController
             'img_profile' => $user['img_profile'],
             'full_name' => $user['full_name'],
             'jabatan' => $user['jabatan'],
-            'karyawan_logged_in' => true, 
+            'karyawan_logged_in' => true,
             'logged_in' => true,
         ]);
 
         // Arahkan berdasarkan jabatan/role
         switch ($user['jabatan']) {
             case 'admin':
-                return redirect()->to('/admin/dashboard');
+                return redirect()->to('karyawan/admin/dashboard');
             case 'kurir':
-                return redirect()->to('/admin/dashboard');
+                return redirect()->to('karyawan/admin/dashboard');
             case 'owner':
-                return redirect()->to('/admin/dashboard');
+                return redirect()->to('karyawan/admin/dashboard');
             default:
-                return redirect()->to('/dashboard');
+                return redirect()->to('karyawan/dashboard');
         }
     }
 

@@ -1,5 +1,5 @@
 <?= $this->include('employers/layout/header') ?>
-<?= $this->include('employers/layout/sidebar_admin') ?>
+<?= $this->include('employers/layout/sidebar') ?>
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <?= $this->include('employers/layout/topbar') ?>
@@ -11,7 +11,7 @@
                 <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
             <?php endif; ?>
 
-            <form action="<?= base_url('admin/categories/subcategories/store') ?>" method="post">
+            <form action="<?= base_url('karyawan/admin/categories/subcategories/store') ?>" method="post">
                 <!-- Readonly ID (will be filled by JS) -->
                 <div class="form-group">
                     <label for="id_sub_category">ID Subkategori</label>

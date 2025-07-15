@@ -1,5 +1,5 @@
 <?= $this->include('employers/layout/header') ?>
-<?= $this->include('employers/layout/sidebar_admin') ?>
+<?= $this->include('employers/layout/sidebar') ?>
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <?= $this->include('employers/layout/topbar') ?>

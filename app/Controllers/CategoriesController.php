@@ -83,7 +83,7 @@ class CategoriesController extends BaseController
             'description' => $description
         ]);
 
-        return redirect()->to('admin/categories')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->to('karyawan/admin/categories')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     // Edit master category

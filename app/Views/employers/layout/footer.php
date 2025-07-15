@@ -68,7 +68,7 @@
 
         var modal = $(this);
         modal.find('#modalProductName').text(productName);
-        modal.find('#deleteForm').attr('action', '/admin/delete-product/' + productId);
+        modal.find('#deleteForm').attr('action', 'karyawan/admin/products/delete/' + productId);
     });
 </script>
 

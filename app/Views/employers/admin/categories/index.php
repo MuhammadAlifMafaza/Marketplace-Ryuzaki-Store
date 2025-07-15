@@ -1,12 +1,12 @@
 <?= $this->include('employers/layout/header') ?>
-<?= $this->include('employers/layout/sidebar_admin') ?>
+<?= $this->include('employers/layout/sidebar') ?>
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <?= $this->include('employers/layout/topbar') ?>
 
         <div class="container-fluid">
-            <h1 class="h3 mb-4 text-gray-800">Master Categories</h1>
-            <a href="<?= base_url('admin/categories/create') ?>" class="btn btn-primary mb-3">+ Tambah Kategori</a>
+            <h1 class="h3 mb-4 text-gray-800">List Categories</h1>
+            <a href="<?= base_url('karyawan/admin/categories/create') ?>" class="btn btn-primary mb-3">+ Tambah Kategori</a>
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -32,9 +32,9 @@
                                         <td><i class="text-secondary mr-2">▸</i> <?= esc($cat['name_category']) ?></td>
                                         <td><?= esc($cat['description']) ?></td>
                                         <td>
-                                            <a href="<?= base_url('admin/categories/edit/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                            <a href="<?= base_url('admin/categories/delete/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">Hapus</a>
-                                            <a href="<?= base_url('admin/categories/subcategories/create/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-info">+ Sub</a>
+                                            <a href="<?= base_url('karyawan/admin/categories/edit/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="<?= base_url('karyawan/admin/categories/delete/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">Hapus</a>
+                                            <a href="<?= base_url('karyawan/admin/categories/subcategories/create/' . $cat['id_master_category']) ?>" class="btn btn-sm btn-info">+ Sub</a>
                                         </td>
                                     </tr>
 
@@ -50,8 +50,8 @@
                                                 <td>↳ <?= esc($sub['name_sub_category']) ?></td>
                                                 <td><?= esc($sub['type']) ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('admin/categories/subcategories/edit/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                    <a href="<?= base_url('admin/categories/subcategories/delete/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus subkategori ini?')">Hapus</a>
+                                                    <a href="<?= base_url('karyawan/admin/categories/subcategories/edit/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                    <a href="<?= base_url('karyawan/admin/categories/subcategories/delete/' . $sub['id_sub_category']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus subkategori ini?')">Hapus</a>
                                                 </td>
                                             </tr>
                                     <?php endif;

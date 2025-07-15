@@ -32,35 +32,7 @@ class AdminController extends BaseController
     }
 
     /* function untuk kelola data produk (CRUD) */
-    public function listProduct()
-    {
-        $data['products'] = $this->productModel->findAll();
-        return view('employers/admin/products/index.php', $data);
-    }
-    public function addProduct()
-    {
-        return view('employers/admin/products/create.php');
-    }
-    public function insertProduct()
-    {
-
-    }
-    public function editProduct()
-    {
-        return view('employers\admin\products\update.php');
-    }
-    public function updateProduct()
-    {
-
-    }
-    public function detailProduct()
-    {
-        return view('employers\admin\products\update.php');
-    }
-    public function deleteProduct()
-    {
-
-    }
+    
 
     /* Function untuk kelola category product (CRUD) */
 
